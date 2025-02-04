@@ -1,10 +1,12 @@
-import useLogout from '../hooks/useLogout';
-import { ModeToggle } from '@/components/ModeToggle';
+"use client";
+
+import useLogout from "../hooks/useLogout";
+import { ModeToggle } from "@/components/shadcn/ModeToggle";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/components/shadcn/Avatar';
+} from "@/components/shadcn/Avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,22 +14,22 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/shadcn/DropdownMenu';
-import { LogOut, User } from 'lucide-react';
-import { FaPlay, FaPause, FaVolumeUp } from 'react-icons/fa';
-import { IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io';
-import SearchBar from '@/components/SearchBar';
-import { Slider } from '@/components/shadcn/Slider';
-import SpotifySearchBar from './SpotifySearchBar';
-import { redirect } from 'next/navigation';
-import Image from 'next/image';
+} from "@/components/shadcn/DropdownMenu";
+import { LogOut, User } from "lucide-react";
+import { FaPlay, FaPause, FaVolumeUp } from "react-icons/fa";
+import { IoIosSkipBackward, IoIosSkipForward } from "react-icons/io";
+import SearchBar from "@/components/SearchBar";
+import { Slider } from "@/components/shadcn/Slider";
+import SpotifySearchBar from "./SpotifySearchBar";
+import { redirect } from "next/navigation";
+import Image from "next/image";
 
 const Header = () => {
   const logout = useLogout();
 
   const handleLogout = async () => {
-    await logout();
-    redirect('/');
+    //await logout();
+    redirect("/");
   };
 
   return (
@@ -44,10 +46,12 @@ const Header = () => {
         <SpotifySearchBar />
       </div>
       <div className="w-1/3 h-full flex items-center gap-3">
-        <Image
+        <img
           src="https://picsum.photos/1000/500"
           alt="photo"
           className="w-12 h-12 object-cover rounded"
+          width={1000}
+          height={500}
         />
         <div className="flex flex-col min-w-fit">
           <span className="text-xl">Dying Star</span>
@@ -77,7 +81,7 @@ const Header = () => {
           <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigate('/profile/hello')}>
+            <DropdownMenuItem onClick={() => redirect("/profile/hello")}>
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </DropdownMenuItem>

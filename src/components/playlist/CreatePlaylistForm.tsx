@@ -1,6 +1,6 @@
-import { useForm } from 'react-hook-form';
-import FormInput from '../FormInput';
-import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import FormInput from "../FormInput";
+import { useState } from "react";
 //import axios from '../../axios/axios';
 
 interface Inputs {
@@ -9,7 +9,7 @@ interface Inputs {
 }
 
 const CreatePlaylistForm = () => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const [isPublic, setIsPublic] = useState(false);
   const [isCollaborative, setIsCollaborative] = useState(false);

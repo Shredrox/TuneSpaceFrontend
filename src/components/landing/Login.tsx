@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 //import axios from "../../axios/axios";
-import FormInput from '../FormInput';
+import FormInput from "../FormInput";
 //import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from '../../hooks/useAuth';
+import useAuth from "../../hooks/useAuth";
 
 const loginSchema = z.object({
   email: z.string().email().trim(),
-  password: z.string().min(1, 'Password is required'),
+  password: z.string().min(1, "Password is required"),
 });
 
 type Inputs = z.infer<typeof loginSchema>;
@@ -19,11 +19,11 @@ type Inputs = z.infer<typeof loginSchema>;
 const Login = () => {
   //const { setAuth } = useAuth();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   //const navigate = useNavigate();
   //const location = useLocation();
-  const from = location.state?.from?.pathname || '/home';
+  const from = location.state?.from?.pathname || "/home";
 
   const {
     register,
@@ -34,11 +34,11 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
+  const watchEmail = watch("email");
+  const watchPassword = watch("password");
 
   useEffect(() => {
-    setError('');
+    setError("");
   }, [watchEmail, watchPassword]);
 
   const onSubmit = async (data: Inputs) => {
@@ -57,13 +57,13 @@ const Login = () => {
       // navigate(from, { replace: true });
     } catch (error: any) {
       if (!error?.response) {
-        setError('No response');
+        setError("No response");
       } else if (error.response?.status === 400) {
-        setError('An error occurred');
+        setError("An error occurred");
       } else if (error.response?.status === 401) {
-        setError('Incorrect email or password');
+        setError("Incorrect email or password");
       } else {
-        setError('Error');
+        setError("Error");
       }
     }
   };

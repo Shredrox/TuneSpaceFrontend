@@ -1,4 +1,4 @@
-export default interface SearchSong{
+export default interface SearchSong {
   id: string;
   name: string;
   artist: string;

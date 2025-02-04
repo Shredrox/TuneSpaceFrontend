@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 //import axios from "../../axios/axios";
-import { useEffect, useState } from 'react';
-import FormInput from '@/components/FormInput';
+import { useEffect, useState } from "react";
+import FormInput from "@/components/FormInput";
 
 const registerSchema = z
   .object({
-    name: z.string().trim().min(2, 'Username must be at least 2 characters'),
+    name: z.string().trim().min(2, "Username must be at least 2 characters"),
     email: z.string().email().trim(),
-    password: z.string().min(4, 'Password must be at least 4 characters'),
+    password: z.string().min(4, "Password must be at least 4 characters"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
   });
 
 type Inputs = z.infer<typeof registerSchema>;
 
 const Register = () => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -33,13 +33,13 @@ const Register = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const watchName = watch('name');
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
-  const watchConfirmPassword = watch('confirmPassword');
+  const watchName = watch("name");
+  const watchEmail = watch("email");
+  const watchPassword = watch("password");
+  const watchConfirmPassword = watch("confirmPassword");
 
   useEffect(() => {
-    setError('');
+    setError("");
   }, [watchName, watchEmail, watchPassword, watchConfirmPassword]);
 
   const onSubmit = async (data: Inputs) => {
@@ -55,13 +55,13 @@ const Register = () => {
       //console.log(response.data);
     } catch (error: any) {
       if (!error?.response) {
-        setError('No response');
+        setError("No response");
       } else if (error.response?.status === 409) {
-        setError('Username is already taken');
+        setError("Username is already taken");
       } else if (error.response?.status === 400) {
-        setError('An error occurred');
+        setError("An error occurred");
       } else {
-        setError('Error');
+        setError("Error");
       }
     }
   };

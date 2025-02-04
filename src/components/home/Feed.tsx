@@ -1,6 +1,7 @@
-import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from '../shadcn/Avatar';
-import { Badge } from '../shadcn/Badge';
+"use client";
+
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/Avatar";
+import { Badge } from "../shadcn/Badge";
 import {
   Card,
   CardContent,
@@ -8,8 +9,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../shadcn/Card';
-import { FaRegHeart, FaCommentAlt } from 'react-icons/fa';
+} from "../shadcn/Card";
+import { FaRegHeart, FaCommentAlt } from "react-icons/fa";
 
 const Feed = () => {
   return (
@@ -20,7 +21,7 @@ const Feed = () => {
             <CardTitle>Periphery - Dying Star</CardTitle>
             <CardDescription className="flex items-center gap-1">
               <Avatar className="w-6 h-6">
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage src="https://github.com/shadcn.png" width={1000} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <p className="text-primary-foreground">Meesho</p>
@@ -31,6 +32,7 @@ const Feed = () => {
               className="w-full h-[300px] object-cover rounded"
               src="https://picsum.photos/1000/500"
               alt=""
+              width={1000}
             />
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non

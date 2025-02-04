@@ -1,4 +1,4 @@
-export default interface Auth{
+export default interface Auth {
   username?: string;
   accessToken?: string;
   role?: string;

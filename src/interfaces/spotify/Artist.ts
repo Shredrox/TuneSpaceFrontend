@@ -1,4 +1,4 @@
-export default interface Artist{
+export default interface Artist {
   name: string;
   image: string;
 }

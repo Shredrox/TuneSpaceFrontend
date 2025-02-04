@@ -1,8 +1,10 @@
+"use client";
+
 // import { Link, useLocation } from 'react-router-dom';
-import { IoHome } from 'react-icons/io5';
-import { IoChatbubbles } from 'react-icons/io5';
-import { RiPlayListFill } from 'react-icons/ri';
-import { Button } from '@/components/shadcn/Button';
+import { IoHome } from "react-icons/io5";
+import { IoChatbubbles } from "react-icons/io5";
+import { RiPlayListFill } from "react-icons/ri";
+import { Button } from "@/components/shadcn/Button";
 
 const Sidebar = () => {
   //const location = useLocation();
@@ -12,9 +14,9 @@ const Sidebar = () => {
   };
 
   const linksData = [
-    { id: 1, to: '/home', text: 'Home', icon: <IoHome /> },
-    { id: 2, to: '/playlists', text: 'Playlists', icon: <RiPlayListFill /> },
-    { id: 3, to: '/chats', text: 'Chats', icon: <IoChatbubbles /> },
+    { id: 1, to: "/home", text: "Home", icon: <IoHome /> },
+    { id: 2, to: "/playlists", text: "Playlists", icon: <RiPlayListFill /> },
+    { id: 3, to: "/chats", text: "Chats", icon: <IoChatbubbles /> },
   ];
 
   return (
@@ -25,7 +27,7 @@ const Sidebar = () => {
             <Button
               key={link.id}
               asChild
-              variant={isActive(link.to) ? 'default' : 'outline'}
+              variant={isActive(link.to) ? "default" : "outline"}
               className="flex gap-1"
             >
               {/* <Link key={link.id} to={link.to}>

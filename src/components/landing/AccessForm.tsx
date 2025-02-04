@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import { FaSpotify } from 'react-icons/fa';
-import Register from './Register';
-import Login from './Login';
-import { useState } from 'react';
-import { Button } from '@/components/shadcn/Button';
+import { FaSpotify } from "react-icons/fa";
+import Register from "./Register";
+import Login from "./Login";
+import { useState } from "react";
+import { Button } from "@/components/shadcn/Button";
+import { BASE_URL, SPOTIFY_ENDPOINTS } from "@/utils/constants";
 
 const AccessForm = () => {
-  const [activeButton, setActiveButton] = useState('login');
+  const [activeButton, setActiveButton] = useState("login");
 
   const handleClick = () => {
-    window.location.href = 'http://localhost:5053/api/Spotify/login';
+    window.location.href = `${BASE_URL}/${SPOTIFY_ENDPOINTS.LOGIN}`;
   };
 
   const handleButtonChange = (btn: string) => {
@@ -21,21 +22,21 @@ const AccessForm = () => {
     <div className="flex flex-col items-center bg-card border rounded-xl p-4 w-[420px] h-[500px]">
       <div className="flex gap-2">
         <Button
-          onClick={() => handleButtonChange('login')}
-          variant={activeButton === 'login' ? 'default' : 'outline'}
+          onClick={() => handleButtonChange("login")}
+          variant={activeButton === "login" ? "default" : "outline"}
         >
           Login
         </Button>
         <Button
-          onClick={() => handleButtonChange('register')}
-          variant={activeButton === 'register' ? 'default' : 'outline'}
+          onClick={() => handleButtonChange("register")}
+          variant={activeButton === "register" ? "default" : "outline"}
         >
           Register
         </Button>
       </div>
 
       <div className="flex justify-center h-[500px]">
-        {activeButton === 'login' ? <Login /> : <Register />}
+        {activeButton === "login" ? <Login /> : <Register />}
       </div>
 
       <button

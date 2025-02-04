@@ -1,4 +1,4 @@
-export default interface UserProfile{
+export default interface UserProfile {
   username: string;
   followerCount: number;
   followingCount: number;
