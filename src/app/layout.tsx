@@ -38,11 +38,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
-            <div className="min-h-screen">
-              <Sidebar />
-              <main className="ml-[150px] mt-16 p-6">{children}</main>
-            </div>
+            {children}
           </ThemeProvider>
         </ReactQueryProvider>
       </body>

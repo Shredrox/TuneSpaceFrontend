@@ -6,18 +6,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 //import axios from "../../axios/axios";
 import { useEffect, useState } from "react";
 import FormInput from "@/components/FormInput";
+import { registerSchema } from "@/schemas/register.schema";
 
-const registerSchema = z
-  .object({
-    name: z.string().trim().min(2, "Username must be at least 2 characters"),
-    email: z.string().email().trim(),
-    password: z.string().min(4, "Password must be at least 4 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+// const registerSchema = z
+//   .object({
+//     name: z.string().trim().min(2, "Username must be at least 2 characters"),
+//     email: z.string().email().trim(),
+//     password: z.string().min(4, "Password must be at least 4 characters"),
+//     confirmPassword: z.string(),
+//   })
+//   .refine((data) => data.password === data.confirmPassword, {
+//     message: "Passwords do not match",
+//     path: ["confirmPassword"],
+//   });
 
 type Inputs = z.infer<typeof registerSchema>;
 

@@ -8,11 +8,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormInput from "../FormInput";
 //import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { loginSchema } from "@/schemas/login.schema";
 
-const loginSchema = z.object({
-  email: z.string().email().trim(),
-  password: z.string().min(1, "Password is required"),
-});
+// const loginSchema = z.object({
+//   email: z.string().email().trim(),
+//   password: z.string().min(1, "Password is required"),
+// });
 
 type Inputs = z.infer<typeof loginSchema>;
 

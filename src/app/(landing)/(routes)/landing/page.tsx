@@ -1,4 +1,4 @@
-import AccessForm from "../../components/landing/AccessForm";
+import AccessForm from "@/components/landing/AccessForm";
 
 const Landing = () => {
   return (

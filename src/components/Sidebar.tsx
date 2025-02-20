@@ -1,22 +1,26 @@
 "use client";
 
-// import { Link, useLocation } from 'react-router-dom';
+import { SiMusicbrainz } from "react-icons/si";
 import { IoHome } from "react-icons/io5";
-import { IoChatbubbles } from "react-icons/io5";
-import { RiPlayListFill } from "react-icons/ri";
 import { Button } from "@/components/shadcn/Button";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Sidebar = () => {
-  //const location = useLocation();
+  const location = usePathname();
 
   const isActive = (path: string) => {
-    return location.pathname.includes(path);
+    return location === path;
   };
 
   const linksData = [
-    { id: 1, to: "/home", text: "Home", icon: <IoHome /> },
-    { id: 2, to: "/playlists", text: "Playlists", icon: <RiPlayListFill /> },
-    { id: 3, to: "/chats", text: "Chats", icon: <IoChatbubbles /> },
+    { id: 1, to: "/", text: "Home", icon: <IoHome /> },
+    {
+      id: 2,
+      to: "/dashboard",
+      text: "Band Dashboard",
+      icon: <SiMusicbrainz />,
+    },
   ];
 
   return (
@@ -30,10 +34,10 @@ const Sidebar = () => {
               variant={isActive(link.to) ? "default" : "outline"}
               className="flex gap-1"
             >
-              {/* <Link key={link.id} to={link.to}>
+              <Link key={link.id} href={link.to}>
                 {link.icon}
                 {link.text}
-              </Link> */}
+              </Link>
             </Button>
           </li>
         ))}
