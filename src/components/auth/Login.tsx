@@ -1,29 +1,31 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-//import axios from "../../axios/axios";
-import FormInput from '../FormInput';
-//import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from '../../hooks/useAuth';
-
-const loginSchema = z.object({
-  email: z.string().email().trim(),
-  password: z.string().min(1, 'Password is required'),
-});
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import FormInput from "../FormInput";
+import useAuth from "../../hooks/useAuth";
+import { loginSchema } from "@/schemas/login.schema";
+import { useRouter } from "next/navigation";
+import axios from "@/axios/axios";
+import { BASE_URL, ENDPOINTS } from "@/utils/constants";
 
 type Inputs = z.infer<typeof loginSchema>;
 
 const Login = () => {
-  //const { setAuth } = useAuth();
+  const { setAuth } = useAuth();
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   //const navigate = useNavigate();
   //const location = useLocation();
-  const from = location.state?.from?.pathname || '/home';
+  //const from = location.state?.from?.pathname || "/home";
+
+  // const destination = Array.isArray(router.query.redirect)
+  //   ? router.query.redirect[0]
+  //   : router.query.redirect || "/dashboard";
 
   const {
     register,
@@ -34,36 +36,38 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
+  const watchEmail = watch("email");
+  const watchPassword = watch("password");
 
   useEffect(() => {
-    setError('');
+    setError("");
   }, [watchEmail, watchPassword]);
 
   const onSubmit = async (data: Inputs) => {
     try {
-      // const response = await axios.post('Auth/login',
-      //   JSON.stringify(data),
-      //   {
-      //     headers: {'Content-Type': 'application/json'}
-      //   }
-      // );
-      // setAuth({
-      //   username: response?.data?.username,
-      //   accessToken: response?.data?.accessToken,
-      //   role: response?.data?.role
-      // });
+      const response = await axios.post(
+        `${BASE_URL}/${ENDPOINTS.LOGIN}`,
+        JSON.stringify(data),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      setAuth({
+        username: response?.data?.username,
+        accessToken: response?.data?.accessToken,
+        role: response?.data?.role,
+      });
       // navigate(from, { replace: true });
+      router.push("/");
     } catch (error: any) {
       if (!error?.response) {
-        setError('No response');
+        setError("No response");
       } else if (error.response?.status === 400) {
-        setError('An error occurred');
+        setError("An error occurred");
       } else if (error.response?.status === 401) {
-        setError('Incorrect email or password');
+        setError("Incorrect email or password");
       } else {
-        setError('Error');
+        setError("Error");
       }
     }
   };

@@ -1,4 +1,6 @@
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+"use client";
+
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
 interface InputProps<T extends FieldValues> {
   type: string;

@@ -1,3 +1,3 @@
-export default interface UserSearchResult{
+export default interface UserSearchResult {
   name: string;
 }

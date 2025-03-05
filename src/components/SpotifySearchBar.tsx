@@ -1,20 +1,15 @@
-'use client';
+"use client";
 
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { Input } from '@/components/shadcn/Input';
-import { Card } from '@/components/shadcn/Card';
-import Loading from './fallback/Loading';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/shadcn/Avatar';
-import Image from 'next/image';
-//import { getSpotifySongsBySearch } from "@/services/spotifyService";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { Input } from "@/components/shadcn/Input";
+import { Card } from "@/components/shadcn/Card";
+import Loading from "./fallback/Loading";
+import Image from "next/image";
+import { getSpotifySongsBySearch } from "@/services/spotifyService";
 
 const SpotifySearchBar = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const {
     data: searchSongs,
@@ -22,15 +17,15 @@ const SpotifySearchBar = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['searchUsers', search],
-    //queryFn: () => getSpotifySongsBySearch(search),
+    queryKey: ["searchUsers", search],
+    queryFn: () => getSpotifySongsBySearch(search),
     enabled: false,
     retry: 1,
   });
 
   useEffect(() => {
     const queryDelay = setTimeout(() => {
-      if (search !== '') {
+      if (search !== "") {
         refetch();
       }
     }, 1000);
@@ -45,17 +40,17 @@ const SpotifySearchBar = () => {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="🔎︎ Search"
       ></Input>
-      {search !== '' && (
+      {search !== "" && (
         <Card
           className="w-full flex flex-col justify-center gap-3 
       top-12 max-h-[800px] absolute 
       z-10 p-4 overflow-y-scroll overflow-auto rounded-2xl"
         >
-          {searchSongs?.length > 0 ? (
+          {searchSongs?.length! > 0 ? (
             searchSongs?.map((song, index) => (
               <Card
                 key={index}
-                onClick={() => setSearch('')}
+                onClick={() => setSearch("")}
                 className="p-4 flex items-center gap-3 cursor-pointer"
               >
                 <Image
@@ -69,7 +64,7 @@ const SpotifySearchBar = () => {
               </Card>
             ))
           ) : searchSongs?.length === 0 ? (
-            'No Songs Found'
+            "No Songs Found"
           ) : isError ? (
             <p>{error.message}</p>
           ) : (

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogContent,
@@ -6,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/shadcn/Dialog';
-import { Button } from '@/components/shadcn/Button';
-import { Input } from '@/components/shadcn/Input';
-import { Textarea } from '@/components/shadcn/Textarea';
+} from "@/components/shadcn/Dialog";
+import { Button } from "@/components/shadcn/Button";
+import { Input } from "@/components/shadcn/Input";
+import { Textarea } from "@/components/shadcn/Textarea";
 
 const CreatePostDialog = () => {
   return (
