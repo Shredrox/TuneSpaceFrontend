@@ -6,10 +6,10 @@ import {
   CarouselPrevious,
 } from "@/components/shadcn/Carousel";
 
-import Feed from "../../../components/home/Feed";
 import { Card, CardContent } from "@/components/shadcn/Card";
 import { IoIosTrendingUp } from "react-icons/io";
 import CreatePostDialog from "@/components/home/CreatePostDialog";
+import Feed from "@/components/home/Feed";
 
 const Home = () => {
   return (

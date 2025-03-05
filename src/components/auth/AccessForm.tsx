@@ -6,12 +6,14 @@ import Login from "./Login";
 import { useState } from "react";
 import { Button } from "@/components/shadcn/Button";
 import { BASE_URL, SPOTIFY_ENDPOINTS } from "@/utils/constants";
+import { useRouter } from "next/navigation";
 
 const AccessForm = () => {
   const [activeButton, setActiveButton] = useState("login");
+  const router = useRouter();
 
-  const handleClick = () => {
-    window.location.href = `${BASE_URL}/${SPOTIFY_ENDPOINTS.LOGIN}`;
+  const handleSpotifyLogin = () => {
+    router.push(`${BASE_URL}/${SPOTIFY_ENDPOINTS.LOGIN}`);
   };
 
   const handleButtonChange = (btn: string) => {
@@ -41,7 +43,7 @@ const AccessForm = () => {
 
       <button
         className="bg-[#1A4645] rounded p-2 flex justify-center items-center gap-2 w-[230px]"
-        onClick={handleClick}
+        onClick={handleSpotifyLogin}
       >
         Log In With Spotify <FaSpotify className="w-8 h-8 text-[#1ed760]" />
       </button>

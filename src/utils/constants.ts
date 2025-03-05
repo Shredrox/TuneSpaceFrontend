@@ -6,7 +6,7 @@ export const ROUTES = {
 
 export const ENDPOINTS = {
   LOGIN: "/Auth/login",
-  REGISTER: "Auth/register",
+  REGISTER: "/Auth/register",
 } as const;
 
 export const SPOTIFY_ENDPOINTS = {

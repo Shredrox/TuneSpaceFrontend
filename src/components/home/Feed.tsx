@@ -24,7 +24,7 @@ const Feed = () => {
                 <AvatarImage src="https://github.com/shadcn.png" width={1000} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <p className="text-primary-foreground">Meesho</p>
+              <span className="text-primary-foreground">Meesho</span>
             </CardDescription>
           </CardHeader>
           <CardContent>

@@ -5,11 +5,6 @@ import { useEffect, useState } from "react";
 import { Input } from "@/components/shadcn/Input";
 import { Card } from "@/components/shadcn/Card";
 import Loading from "./fallback/Loading";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/shadcn/Avatar";
 import Image from "next/image";
 import { getSpotifySongsBySearch } from "@/services/spotifyService";
 
