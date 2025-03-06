@@ -1,15 +1,13 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import FormInput from "@/components/FormInput";
-import { registerSchema } from "@/schemas/register.schema";
+import { RegisterInputs, registerSchema } from "@/schemas/register.schema";
 import axios from "@/axios/axios";
 import { BASE_URL, ENDPOINTS } from "@/utils/constants";
-
-type Inputs = z.infer<typeof registerSchema>;
+import { registerUser } from "@/actions/user-actions";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -19,7 +17,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<Inputs>({
+  } = useForm<RegisterInputs>({
     resolver: zodResolver(registerSchema),
   });
 
@@ -32,7 +30,7 @@ const Register = () => {
     setError("");
   }, [watchName, watchEmail, watchPassword, watchConfirmPassword]);
 
-  const onSubmit = async (data: Inputs) => {
+  const onSubmit = async (data: RegisterInputs) => {
     const { confirmPassword, ...request } = data;
 
     try {

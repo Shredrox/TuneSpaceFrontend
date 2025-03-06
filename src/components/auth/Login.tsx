@@ -2,16 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormInput from "../FormInput";
 import useAuth from "../../hooks/useAuth";
-import { loginSchema } from "@/schemas/login.schema";
+import { LoginInputs, loginSchema } from "@/schemas/login.schema";
 import { useRouter } from "next/navigation";
 import axios from "@/axios/axios";
 import { BASE_URL, ENDPOINTS } from "@/utils/constants";
-
-type Inputs = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const { setAuth } = useAuth();
@@ -32,7 +29,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<Inputs>({
+  } = useForm<LoginInputs>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -43,7 +40,7 @@ const Login = () => {
     setError("");
   }, [watchEmail, watchPassword]);
 
-  const onSubmit = async (data: Inputs) => {
+  const onSubmit = async (data: LoginInputs) => {
     try {
       const response = await axios.post(
         `${BASE_URL}/${ENDPOINTS.LOGIN}`,
