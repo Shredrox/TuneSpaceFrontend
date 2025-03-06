@@ -1,6 +1,7 @@
 "use client";
 
 import { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import { Input } from "./shadcn/Input";
 
 interface InputProps<T extends FieldValues> {
   type: string;
@@ -19,12 +20,7 @@ const FormInput = <T extends FieldValues>({
 }: InputProps<T>) => {
   return (
     <>
-      <input
-        className="bg-[#0d0a15] rounded-2xl p-3"
-        type={type}
-        placeholder={placeholder}
-        {...register(name)}
-      />
+      <Input type={type} placeholder={placeholder} {...register(name)} />
       <p className="text-orange-600">{error}</p>
     </>
   );
