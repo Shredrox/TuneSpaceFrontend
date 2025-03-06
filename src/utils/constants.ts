@@ -5,12 +5,14 @@ export const ROUTES = {
 } as const;
 
 export const ENDPOINTS = {
-  LOGIN: "/Auth/login",
-  REGISTER: "/Auth/register",
+  LOGIN: "Auth/login",
+  REGISTER: "Auth/register",
+  BANDREGISTER: "Band/register",
 } as const;
 
 export const SPOTIFY_ENDPOINTS = {
-  LOGIN: "/Spotify/login",
-  SEARCH: "/Spotify/search",
-  PROFILE: "/Spotify/profile",
+  LOGIN: "Spotify/login",
+  SEARCH: "Spotify/search",
+  PROFILE: "Spotify/profile",
+  ARTIST: "Spotify/artist",
 } as const;
