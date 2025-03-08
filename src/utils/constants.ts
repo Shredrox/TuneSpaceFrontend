@@ -8,6 +8,7 @@ export const ENDPOINTS = {
   LOGIN: "Auth/login",
   REGISTER: "Auth/register",
   BANDREGISTER: "Band/register",
+  BAND: "Band",
 } as const;
 
 export const SPOTIFY_ENDPOINTS = {
