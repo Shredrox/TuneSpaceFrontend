@@ -8,7 +8,7 @@ import { Button } from "@/components/shadcn/Button";
 import { BASE_URL, SPOTIFY_ENDPOINTS } from "@/utils/constants";
 import { useRouter } from "next/navigation";
 
-const AccessForm = () => {
+const AccessForm = ({ shouldRedirect }: { shouldRedirect: boolean }) => {
   const [activeButton, setActiveButton] = useState("login");
   const router = useRouter();
 
@@ -37,8 +37,12 @@ const AccessForm = () => {
         </Button>
       </div>
 
-      <div className="flex justify-center h-[500px]">
-        {activeButton === "login" ? <Login /> : <Register />}
+      <div className="flex justify-center h-[500px] w-2/3">
+        {activeButton === "login" ? (
+          <Login shouldRedirect={shouldRedirect} />
+        ) : (
+          <Register />
+        )}
       </div>
 
       <button

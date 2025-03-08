@@ -7,7 +7,6 @@ import FormInput from "@/components/FormInput";
 import { RegisterInputs, registerSchema } from "@/schemas/register.schema";
 import axios from "@/axios/axios";
 import { BASE_URL, ENDPOINTS } from "@/utils/constants";
-import { registerUser } from "@/actions/user-actions";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -59,7 +58,7 @@ const Register = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       className="flex flex-col justify-center items-center bg-gray-15 
-      gap-2 p-4 white-98 w-1/2 rounded-2xl"
+      gap-2 p-4 white-98 w-full rounded-2xl"
     >
       <h2 className="form-h2 white-98">Register</h2>
 

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import axios from "@/axios/axios";
 import { BASE_URL, ENDPOINTS } from "@/utils/constants";
 
-const Login = () => {
+const Login = ({ shouldRedirect }: { shouldRedirect: boolean }) => {
   const { setAuth } = useAuth();
 
   const [error, setError] = useState("");
@@ -55,7 +55,9 @@ const Login = () => {
         role: response?.data?.role,
       });
       // navigate(from, { replace: true });
-      router.push("/");
+      if (shouldRedirect) {
+        router.push("/");
+      }
     } catch (error: any) {
       if (!error?.response) {
         setError("No response");
@@ -74,7 +76,7 @@ const Login = () => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       className="flex flex-col justify-center items-center bg-gray-15 
-      gap-3 p-4 white-98 w-1/2 rounded-2xl"
+      gap-3 p-4 white-98 w-full rounded-2xl"
     >
       <h2 className="form-h2 white-98">Login</h2>
 
@@ -93,7 +95,7 @@ const Login = () => {
         error={errors.password?.message}
       />
 
-      <button className="bg-[#0d0a15] rounded-2xl p-2">Login</button>
+      <button className="bg-[#0d0a15] rounded-2xl p-2">Log In</button>
       <p className="text-orange-600">{error}</p>
     </form>
   );
