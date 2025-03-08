@@ -20,6 +20,10 @@ import SpotifySearchBar from "./SpotifySearchBar";
 import { redirect } from "next/navigation";
 import { LuMusic4 } from "react-icons/lu";
 
+import Link from "next/link";
+import Navigation from "./Navigation";
+import { SidebarTrigger } from "./shadcn/Sidebar";
+
 const Header = () => {
   const logout = useLogout();
 
@@ -32,37 +36,41 @@ const Header = () => {
     <header
       className="bg-[#18191b] backdrop-blur 
     border-b supports-[backdrop-filter]:bg-background/60 
-    w-full flex justify-between items-center h-16 p-4 fixed top-0 z-50"
+    w-full flex justify-center items-center h-16 p-4 top-0 z-50 shrink-0 gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12"
     >
-      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight flex items-center gap-2">
-        <LuMusic4 /> TuneSpace
-      </h3>
-      <div className="w-1/3 flex relative">
-        {/* <SearchBar/> */}
-        <SpotifySearchBar />
-      </div>
-      <div className="flex gap-2">
-        <ModeToggle />
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => redirect("/profile/hello")}>
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleLogout}>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Log out</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="scroll-m-20 text-2xl font-semibold tracking-tight flex justify-between items-center gap-6 w-2/3">
+        <div className="flex justify-center items-center gap-6">
+          <SidebarTrigger />
+          <div className="flex justify-center items-center gap-1">
+            <LuMusic4 />
+            <span>TuneSpace</span>
+          </div>
+          <Navigation />
+        </div>
+        <div className="flex gap-2">
+          <SpotifySearchBar />
+          <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => redirect("/profile/hello")}>
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </header>
   );
