@@ -19,10 +19,10 @@ const FormInput = <T extends FieldValues>({
   error,
 }: InputProps<T>) => {
   return (
-    <>
+    <div className="w-full">
       <Input type={type} placeholder={placeholder} {...register(name)} />
       <p className="text-orange-600">{error}</p>
-    </>
+    </div>
   );
 };
 
