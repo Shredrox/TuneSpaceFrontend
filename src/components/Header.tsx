@@ -36,7 +36,7 @@ const Header = () => {
     <header
       className="bg-[#18191b] backdrop-blur 
     border-b supports-[backdrop-filter]:bg-background/60 
-    w-full flex justify-center items-center h-16 p-4 top-0 z-50 shrink-0 gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12"
+    w-full flex justify-center items-center sticky h-16 p-4 top-0 z-50 shrink-0 gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-16"
     >
       <div className="scroll-m-20 text-2xl font-semibold tracking-tight flex justify-between items-center gap-6 w-2/3">
         <div className="flex justify-center items-center gap-6">
