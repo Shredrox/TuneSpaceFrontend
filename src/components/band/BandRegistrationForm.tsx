@@ -11,7 +11,6 @@ import {
   BandRegisterInputs,
   bandRegisterSchema,
 } from "@/schemas/band-register.schema";
-import AccessForm from "../auth/AccessForm";
 import {
   SelectContent,
   SelectTrigger,

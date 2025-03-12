@@ -2,7 +2,7 @@
 
 import { AppSidebar } from "@/components/AppSidebar";
 import Header from "@/components/Header";
-import { LoginForm } from "@/components/shadcn/LoginForm";
+import { AuthForm } from "@/components/auth/AuthForm";
 import { SidebarProvider } from "@/components/shadcn/Sidebar";
 import useAuth from "@/hooks/useAuth";
 
@@ -16,7 +16,7 @@ export default function MainClientLayout({
   if (auth.accessToken) {
     return (
       <>
-        <SidebarProvider defaultOpen={false}>
+        <SidebarProvider defaultOpen={true}>
           <AppSidebar />
           <main className="relative flex w-full flex-1 flex-col bg-background md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow">
             <Header />
@@ -42,7 +42,7 @@ export default function MainClientLayout({
               {/* <span className="text-xl">Want to discover bands?</span>
             <span>Enter here</span> */}
               {/* <AccessForm shouldRedirect={true} /> */}
-              <LoginForm className="w-[750px]" />
+              <AuthForm className="w-[750px]" />
             </div>
           </div>
         </div>
