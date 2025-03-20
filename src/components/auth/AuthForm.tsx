@@ -22,7 +22,7 @@ export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
           {isLogin ? (
             <Card className="overflow-hidden">
               <CardContent className="grid p-0 md:grid-cols-2">
-                <Login shouldRedirect={true} setIsLogin={setIsLogin} />
+                <Login shouldRedirect={false} setIsLogin={setIsLogin} />
                 <div className="relative hidden bg-muted md:block">
                   <img
                     src="https://picsum.photos/700"

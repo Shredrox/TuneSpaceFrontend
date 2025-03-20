@@ -54,6 +54,7 @@ const Login = ({
         }
       );
       setAuth({
+        id: response?.data?.id,
         username: response?.data?.username,
         accessToken: response?.data?.accessToken,
         role: response?.data?.role,

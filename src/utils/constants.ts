@@ -6,6 +6,7 @@ export const ROUTES = {
 
 export const ENDPOINTS = {
   LOGIN: "Auth/login",
+  LOGOUT: "Auth/logout",
   REGISTER: "Auth/register",
   BANDREGISTER: "Band/register",
   BAND: "Band",
@@ -17,3 +18,10 @@ export const SPOTIFY_ENDPOINTS = {
   PROFILE: "Spotify/profile",
   ARTIST: "Spotify/artist",
 } as const;
+
+export enum UserRole {
+  Admin = "Admin",
+  BandAdmin = "BandAdmin",
+  BandMember = "BandMember",
+  Listener = "Listener",
+}

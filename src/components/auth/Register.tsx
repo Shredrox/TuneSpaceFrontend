@@ -6,10 +6,16 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import FormInput from "@/components/FormInput";
 import { RegisterInputs, registerSchema } from "@/schemas/register.schema";
 import axios from "@/axios/axios";
-import { BASE_URL, ENDPOINTS, SPOTIFY_ENDPOINTS } from "@/utils/constants";
+import {
+  BASE_URL,
+  ENDPOINTS,
+  SPOTIFY_ENDPOINTS,
+  UserRole,
+} from "@/utils/constants";
 import { FaSpotify } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { Button } from "../shadcn/Button";
+import useAuth from "@/hooks/useAuth";
 
 const Register = ({
   setFormStep,
@@ -20,6 +26,8 @@ const Register = ({
 }) => {
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const { setAuth } = useAuth();
 
   const handleSpotifyLogin = () => {
     router.push(`${BASE_URL}/${SPOTIFY_ENDPOINTS.LOGIN}`);
@@ -44,10 +52,11 @@ const Register = ({
   }, [watchName, watchEmail, watchPassword, watchConfirmPassword]);
 
   const onSubmit = async (data: RegisterInputs) => {
-    const { confirmPassword, ...request } = data;
+    const { confirmPassword, ...rest } = data;
+    const request = { ...rest, role: UserRole.Listener };
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${BASE_URL}/${ENDPOINTS.REGISTER}`,
         JSON.stringify(request),
         {
@@ -56,6 +65,7 @@ const Register = ({
       );
 
       setFormStep(1);
+      setAuth({ id: response?.data });
     } catch (error: any) {
       handleRequestError(error);
     }
