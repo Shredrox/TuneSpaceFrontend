@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/Avatar";
-import { toast } from "sonner";
 import {
   Card,
   CardHeader,
@@ -11,7 +10,7 @@ import {
   CardContent,
 } from "../shadcn/Card";
 import { Separator } from "../shadcn/Separator";
-import { FaApple, FaSpotify, FaYoutube } from "react-icons/fa";
+import { FaSpotify, FaYoutube } from "react-icons/fa";
 import { SiTidal, SiApplemusic } from "react-icons/si";
 import YouTubeEmbedDialog from "./YouTubeEmbedDialog";
 import {
@@ -22,42 +21,22 @@ import {
   CarouselPrevious,
 } from "../shadcn/Carousel";
 import useAuth from "@/hooks/useAuth";
-import axios from "@/axios/axios";
-import { ENDPOINTS, SPOTIFY_ENDPOINTS } from "@/utils/constants";
 import Band from "@/interfaces/Band";
+import useBandData from "@/hooks/query/useBandData";
+import Loading from "../fallback/Loading";
+import useToast from "@/hooks/useToast";
 
 const BandDashboard = () => {
   const { auth } = useAuth();
-  const [band, setBand] = useState<any>(null);
-  const [spotifyStats, setSpotifyStats] = useState<any>(null);
 
   const [embededYouTubeVideo, setEmbededYouTubeVideo] = useState<string | null>(
     null
   );
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    const getBand = async () => {
-      const band = (await axios.get(`${ENDPOINTS.BAND}/user/${auth?.id}`)).data;
-      setBand(band);
-    };
-
-    if (auth.id) {
-      getBand();
-    }
-  }, [auth]);
-
-  useEffect(() => {
-    const aa = async () => {
-      const response = await axios.get(
-        `${SPOTIFY_ENDPOINTS.ARTIST}/6d24kC5fxHFOSEAmjQPPhc?si=pUj7xxatS5iejgqyXO0eow`
-      );
-      console.log(response.data);
-      setSpotifyStats(response.data);
-    };
-
-    aa();
-  }, []);
+  const { bandData, isBandLoading, isBandError, bandError } = useBandData(
+    auth?.id || ""
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -65,35 +44,21 @@ const BandDashboard = () => {
 
   useEffect(() => {
     if (mounted) {
-      renderToast();
+      useToast(
+        "Welcome to the Band Dashboard! Here you can manage your band activities as well as add additional info for your band."
+      );
     }
   }, [mounted]);
 
   useEffect(() => {
     if (embededYouTubeVideo) {
-      toast("YouTube video successfully embedded!", {
-        duration: 5000,
-        cancel: {
-          label: "Dismiss",
-          onClick: () => {},
-        },
-      });
+      useToast("YouTube video successfully embedded!", 5000);
     }
   }, [embededYouTubeVideo]);
 
-  const renderToast = () => {
-    toast(
-      "Welcome to the Band Dashboard! Here you can manage your band activities as well as add additional info for your band.",
-      {
-        duration: 10000,
-        style: { height: "100px" },
-        cancel: {
-          label: "Dismiss",
-          onClick: () => {},
-        },
-      }
-    );
-  };
+  if (isBandLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col items-start gap-4 p-4">
@@ -101,7 +66,9 @@ const BandDashboard = () => {
       <Card className="w-full p-4 flex flex-col gap-4">
         <CardHeader className="flex flex-row justify-left items-center h-[300px] gap-4">
           <Avatar className="w-[200px] h-[200px]">
-            <AvatarImage src={`data:image/jpeg;base64,${band?.coverImage}`} />
+            <AvatarImage
+              src={`data:image/jpeg;base64,${bandData.band?.coverImage}`}
+            />
             <AvatarFallback>BandPicture</AvatarFallback>
           </Avatar>
           <Separator orientation="vertical" />
@@ -115,15 +82,15 @@ const BandDashboard = () => {
                   leading-none
                   tracking-tight text-white"
                 >
-                  {band?.name}
+                  {bandData.band?.name}
                 </span>
-                <span className="text-lg">{band?.description}</span>
-                <span className="text-lg">{band?.genre}</span>
+                <span className="text-lg">{bandData.band?.description}</span>
+                <span className="text-lg">{bandData.band?.genre}</span>
                 <span className="text-lg">
-                  {band?.country}, {band?.city}
+                  {bandData.band?.country}, {bandData.band?.city}
                 </span>
               </div>
-              {embededYouTubeVideo && (
+              {embededYouTubeVideo ? (
                 <iframe
                   className="w-[420px] aspect-video rounded-lg"
                   src={`https://www.youtube.com/embed/${embededYouTubeVideo}`}
@@ -131,6 +98,13 @@ const BandDashboard = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
+              ) : (
+                <Card className="p-2 flex-1 flex flex-col items-center justify-center gap-2">
+                  <FaYoutube className="text-[#FF0000]" size={50} />
+                  <YouTubeEmbedDialog
+                    setEmbededYouTubeVideo={setEmbededYouTubeVideo}
+                  />
+                </Card>
               )}
               <Carousel className="ml-11 w-full max-w-sm">
                 <CarouselContent className="-ml-1">
@@ -157,12 +131,6 @@ const BandDashboard = () => {
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <div className="flex w-full gap-4">
-            <Card className="p-2 flex-1 flex flex-col items-center justify-center gap-2">
-              <FaYoutube className="text-[#FF0000]" size={50} />
-              <YouTubeEmbedDialog
-                setEmbededYouTubeVideo={setEmbededYouTubeVideo}
-              />
-            </Card>
             <Card className="p-2 flex-1 flex flex-col items-center justify-center">
               <CardHeader className="w-full flex justify-left items-center gap-4">
                 <div className="flex gap-4 items-center justify-center w-full">
@@ -171,11 +139,13 @@ const BandDashboard = () => {
                   <h3>Spotify Stats</h3>
                 </div>
                 <Avatar className="w-[200px] h-[200px]">
-                  <AvatarImage src={spotifyStats?.images[0].url} />
+                  <AvatarImage src={bandData.spotifyProfile?.images[0].url} />
                   <AvatarFallback>BandPicture</AvatarFallback>
                 </Avatar>
-                <span>Followers: {spotifyStats?.followers.total}</span>
-                <span>Popularity: {spotifyStats?.popularity}</span>
+                <span>
+                  Followers: {bandData.spotifyProfile?.followers.total}
+                </span>
+                <span>Popularity: {bandData.spotifyProfile?.popularity}</span>
               </CardHeader>
             </Card>
             <Card className="p-2 flex-1 flex flex-col items-center justify-center">
@@ -197,7 +167,7 @@ const BandDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
-              {band?.members?.map((member: any, index: number) => (
+              {bandData.band?.members?.map((member: any, index: number) => (
                 <Card key={index} className="flex flex-row items-center gap-4">
                   <Avatar className="w-[100px] h-[100px]">
                     <AvatarImage
@@ -220,7 +190,7 @@ const BandDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
-              {band?.members?.map((member: any, index: number) => (
+              {bandData.band?.members?.map((member: any, index: number) => (
                 <Card key={index} className="flex flex-row items-center gap-4">
                   <Avatar className="w-[100px] h-[100px]">
                     <AvatarImage
@@ -243,7 +213,7 @@ const BandDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
-              {band?.members?.map((member: any, index: number) => (
+              {bandData.band?.members?.map((member: any, index: number) => (
                 <Card key={index} className="flex flex-row items-center gap-4">
                   <Avatar className="w-[100px] h-[100px]">
                     <AvatarImage
