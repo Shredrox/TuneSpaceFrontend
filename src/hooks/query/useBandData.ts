@@ -1,5 +1,6 @@
 import { getBand, updateBand } from "@/services/bandService";
 import { getSpotifyArtist } from "@/services/spotifyService";
+import { isNullOrEmpty } from "@/utils/helpers";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const useBandData = (userId: string) => {
@@ -23,7 +24,7 @@ const useBandData = (userId: string) => {
   } = useQuery({
     queryKey: ["bandSpotify", band?.id],
     queryFn: () => getSpotifyArtist(band?.spotifyId),
-    enabled: !!band && band.spotifyId !== null,
+    enabled: !!band && !isNullOrEmpty(band.spotifyId),
   });
 
   const { mutateAsync: updateBandMutation } = useMutation({
