@@ -21,26 +21,29 @@ import {
   CarouselPrevious,
 } from "../shadcn/Carousel";
 import useAuth from "@/hooks/useAuth";
-import Band from "@/interfaces/Band";
 import useBandData from "@/hooks/query/useBandData";
 import Loading from "../fallback/Loading";
 import useToast from "@/hooks/useToast";
+import ConnectSpotifyDialog from "./ConnectSpotifyDialog";
 
 const BandDashboard = () => {
   const { auth } = useAuth();
 
-  const [embededYouTubeVideo, setEmbededYouTubeVideo] = useState<string | null>(
-    null
-  );
-  const [mounted, setMounted] = useState(false);
+  const { bandData, mutations, isBandLoading, isBandError, bandError } =
+    useBandData(auth?.id || "");
 
-  const { bandData, isBandLoading, isBandError, bandError } = useBandData(
-    auth?.id || ""
-  );
+  const [embeddedYouTubeVideo, setEmbeddedYouTubeVideo] = useState<
+    string | null
+  >(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    console.log(bandData);
+  }, [bandData]);
 
   useEffect(() => {
     if (mounted) {
@@ -51,10 +54,17 @@ const BandDashboard = () => {
   }, [mounted]);
 
   useEffect(() => {
-    if (embededYouTubeVideo) {
+    if (embeddedYouTubeVideo) {
       useToast("YouTube video successfully embedded!", 5000);
     }
-  }, [embededYouTubeVideo]);
+  }, [embeddedYouTubeVideo]);
+
+  const handleBandUpdate = async (spotifyId: string) => {
+    await mutations.updateBandMutation({
+      id: bandData.band?.id,
+      spotifyId: spotifyId,
+    });
+  };
 
   if (isBandLoading) {
     return <Loading />;
@@ -89,20 +99,22 @@ const BandDashboard = () => {
                 <span className="text-lg">
                   {bandData.band?.country}, {bandData.band?.city}
                 </span>
+                {bandData.band?.spotifyId}
               </div>
-              {embededYouTubeVideo ? (
+              {embeddedYouTubeVideo ? (
                 <iframe
                   className="w-[420px] aspect-video rounded-lg"
-                  src={`https://www.youtube.com/embed/${embededYouTubeVideo}`}
+                  src={`https://www.youtube.com/embed/${embeddedYouTubeVideo}`}
                   title="YouTube video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 ></iframe>
               ) : (
                 <Card className="p-2 flex-1 flex flex-col items-center justify-center gap-2">
                   <FaYoutube className="text-[#FF0000]" size={50} />
                   <YouTubeEmbedDialog
-                    setEmbededYouTubeVideo={setEmbededYouTubeVideo}
+                    setEmbeddedYouTubeVideo={setEmbeddedYouTubeVideo}
                   />
                 </Card>
               )}
@@ -134,28 +146,50 @@ const BandDashboard = () => {
             <Card className="p-2 flex-1 flex flex-col items-center justify-center">
               <CardHeader className="w-full flex justify-left items-center gap-4">
                 <div className="flex gap-4 items-center justify-center w-full">
-                  {" "}
                   <FaSpotify className="text-[#1DB954]" size={50} />
                   <h3>Spotify Stats</h3>
                 </div>
-                <Avatar className="w-[200px] h-[200px]">
-                  <AvatarImage src={bandData.spotifyProfile?.images[0].url} />
-                  <AvatarFallback>BandPicture</AvatarFallback>
-                </Avatar>
-                <span>
-                  Followers: {bandData.spotifyProfile?.followers.total}
-                </span>
-                <span>Popularity: {bandData.spotifyProfile?.popularity}</span>
+                {bandData.spotifyProfile ? (
+                  <>
+                    <Avatar className="w-[200px] h-[200px]">
+                      <AvatarImage
+                        src={bandData.spotifyProfile?.images[0].url}
+                      />
+                      <AvatarFallback>BandPicture</AvatarFallback>
+                    </Avatar>
+                    <span>
+                      Followers: {bandData.spotifyProfile?.followers.total}
+                    </span>
+                    <span>
+                      Popularity: {bandData.spotifyProfile?.popularity}
+                    </span>
+                    <iframe
+                      className="rounded-3xl"
+                      src={`https://open.spotify.com/embed/artist/${bandData.band?.spotifyId}?utm_source=generator&theme=0`}
+                      width="100%"
+                      height="152"
+                      allowFullScreen
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    ></iframe>
+                  </>
+                ) : (
+                  <ConnectSpotifyDialog handleBandUpdate={handleBandUpdate} />
+                )}
               </CardHeader>
             </Card>
             <Card className="p-2 flex-1 flex flex-col items-center justify-center">
               <CardHeader className="w-full flex justify-left items-center gap-4">
-                <SiApplemusic size={50} /> <h3>Apple Music Stats</h3>
+                <div className="flex gap-4 items-center justify-center w-full">
+                  <SiApplemusic size={50} /> <h3>Apple Music Stats</h3>
+                </div>
               </CardHeader>
             </Card>
             <Card className="p-2 flex-1 flex flex-col items-center justify-center">
               <CardHeader className="w-full flex justify-left items-center gap-4">
-                <SiTidal size={50} /> <h3>Tidal Stats</h3>
+                <div className="flex gap-4 items-center justify-center w-full">
+                  <SiTidal size={50} /> <h3>Tidal Stats</h3>
+                </div>
               </CardHeader>
             </Card>
           </div>
@@ -167,7 +201,7 @@ const BandDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
-              {bandData.band?.members?.map((member: any, index: number) => (
+              {/* {bandData.band?.members?.map((member: any, index: number) => (
                 <Card key={index} className="flex flex-row items-center gap-4">
                   <Avatar className="w-[100px] h-[100px]">
                     <AvatarImage
@@ -180,7 +214,7 @@ const BandDashboard = () => {
                     <span className="text-lg">{member.role}</span>
                   </div>
                 </Card>
-              ))}
+              ))} */}
             </div>
           </CardContent>
         </Card>
@@ -190,7 +224,7 @@ const BandDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
-              {bandData.band?.members?.map((member: any, index: number) => (
+              {/* {bandData.band?.members?.map((member: any, index: number) => (
                 <Card key={index} className="flex flex-row items-center gap-4">
                   <Avatar className="w-[100px] h-[100px]">
                     <AvatarImage
@@ -203,7 +237,7 @@ const BandDashboard = () => {
                     <span className="text-lg">{member.role}</span>
                   </div>
                 </Card>
-              ))}
+              ))} */}
             </div>
           </CardContent>
         </Card>
@@ -213,7 +247,7 @@ const BandDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
-              {bandData.band?.members?.map((member: any, index: number) => (
+              {/* {bandData.band?.members?.map((member: any, index: number) => (
                 <Card key={index} className="flex flex-row items-center gap-4">
                   <Avatar className="w-[100px] h-[100px]">
                     <AvatarImage
@@ -226,7 +260,7 @@ const BandDashboard = () => {
                     <span className="text-lg">{member.role}</span>
                   </div>
                 </Card>
-              ))}
+              ))} */}
             </div>
           </CardContent>
         </Card>

@@ -15,11 +15,11 @@ import { Dispatch, useEffect, useState } from "react";
 import { getYouTubeVideoId } from "@/utils/helpers";
 
 interface YouTubeEmbedDialogProps {
-  setEmbededYouTubeVideo: Dispatch<React.SetStateAction<string | null>>;
+  setEmbeddedYouTubeVideo: Dispatch<React.SetStateAction<string | null>>;
 }
 
 const YouTubeEmbedDialog = ({
-  setEmbededYouTubeVideo,
+  setEmbeddedYouTubeVideo,
 }: YouTubeEmbedDialogProps) => {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -74,7 +74,7 @@ const YouTubeEmbedDialog = ({
           <DialogClose asChild>
             <Button
               type="submit"
-              onClick={() => setEmbededYouTubeVideo(videoId)}
+              onClick={() => setEmbeddedYouTubeVideo(videoId)}
             >
               Confirm
             </Button>

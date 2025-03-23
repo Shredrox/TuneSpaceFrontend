@@ -1,4 +1,5 @@
 export default interface Band {
+  id?: string;
   name: string;
   description?: string;
   genre?: string;
@@ -6,4 +7,5 @@ export default interface Band {
   country?: string;
   city?: string;
   userId: string;
+  spotifyId?: string;
 }

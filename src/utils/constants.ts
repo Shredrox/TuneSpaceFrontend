@@ -9,6 +9,7 @@ export const ENDPOINTS = {
   LOGOUT: "Auth/logout",
   REGISTER: "Auth/register",
   BANDREGISTER: "Band/register",
+  BANDUPDATE: "Band/update",
   BAND: "Band",
 } as const;
 

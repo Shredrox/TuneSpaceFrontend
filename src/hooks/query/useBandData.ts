@@ -1,8 +1,10 @@
-import { getBand } from "@/services/bandService";
+import { getBand, updateBand } from "@/services/bandService";
 import { getSpotifyArtist } from "@/services/spotifyService";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const useBandData = (userId: string) => {
+  const queryClient = useQueryClient();
+
   const {
     data: band,
     isLoading: isBandDataLoading,
@@ -19,9 +21,18 @@ const useBandData = (userId: string) => {
     isError: isSpotifyProfileError,
     error: spotifyProfileError,
   } = useQuery({
-    queryKey: ["bandSpotify"],
-    queryFn: () => getSpotifyArtist(band.spotifyId),
-    enabled: !!band && band.spotifyId !== "",
+    queryKey: ["bandSpotify", band?.id],
+    queryFn: () => getSpotifyArtist(band?.spotifyId),
+    enabled: !!band && band.spotifyId !== null,
+  });
+
+  const { mutateAsync: updateBandMutation } = useMutation({
+    mutationFn: updateBand,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["band", userId],
+      });
+    },
   });
 
   const isBandLoading = isBandDataLoading || isSpotifyProfileLoading;
@@ -30,6 +41,7 @@ const useBandData = (userId: string) => {
 
   return {
     bandData: { band, spotifyProfile },
+    mutations: { updateBandMutation },
     isBandLoading,
     isBandError,
     bandError,

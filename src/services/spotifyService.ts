@@ -17,7 +17,7 @@ export const getSpotifySongsBySearch = async (
 };
 
 export const getSpotifyArtist = async (
-  artistId: string
+  artistId: string | undefined
 ): Promise<SpotifyArtist> => {
   return (await axios.get(`${SPOTIFY_ENDPOINTS.ARTIST}/${artistId}`)).data;
 };
