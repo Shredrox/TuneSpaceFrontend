@@ -5,12 +5,24 @@ export const ROUTES = {
 } as const;
 
 export const ENDPOINTS = {
-  LOGIN: "/Auth/login",
-  REGISTER: "/Auth/register",
+  LOGIN: "Auth/login",
+  LOGOUT: "Auth/logout",
+  REGISTER: "Auth/register",
+  BANDREGISTER: "Band/register",
+  BANDUPDATE: "Band/update",
+  BAND: "Band",
 } as const;
 
 export const SPOTIFY_ENDPOINTS = {
-  LOGIN: "/Spotify/login",
-  SEARCH: "/Spotify/search",
-  PROFILE: "/Spotify/profile",
+  LOGIN: "Spotify/login",
+  SEARCH: "Spotify/search",
+  PROFILE: "Spotify/profile",
+  ARTIST: "Spotify/artist",
 } as const;
+
+export enum UserRole {
+  Admin = "Admin",
+  BandAdmin = "BandAdmin",
+  BandMember = "BandMember",
+  Listener = "Listener",
+}

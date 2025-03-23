@@ -34,7 +34,7 @@ const SpotifySearchBar = () => {
   }, [search]);
 
   return (
-    <div className="w-full">
+    <div className="w-96">
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
