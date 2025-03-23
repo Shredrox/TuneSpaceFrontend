@@ -15,11 +15,11 @@ import { useState } from "react";
 import { extractArtistIdFromSpotifyLink } from "@/utils/helpers";
 
 interface ConnectSpotifyDialogProps {
-  handleBandUpdate: (spotifyId: string) => Promise<void>;
+  handleSpotifyIdUpdate: (spotifyId: string) => Promise<void>;
 }
 
 const ConnectSpotifyDialog = ({
-  handleBandUpdate,
+  handleSpotifyIdUpdate,
 }: ConnectSpotifyDialogProps) => {
   const [spotifyArtistLink, setSpotifyArtistLink] = useState("");
 
@@ -30,7 +30,7 @@ const ConnectSpotifyDialog = ({
   const handleSpotifyLinkSubmit = async () => {
     const spotifyId = extractArtistIdFromSpotifyLink(spotifyArtistLink);
     if (spotifyId) {
-      await handleBandUpdate(spotifyId);
+      await handleSpotifyIdUpdate(spotifyId);
     }
   };
 

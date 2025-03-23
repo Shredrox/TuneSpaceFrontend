@@ -8,4 +8,5 @@ export default interface Band {
   city?: string;
   userId: string;
   spotifyId?: string;
+  youTubeEmbedId?: string;
 }

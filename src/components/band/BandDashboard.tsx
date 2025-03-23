@@ -59,10 +59,17 @@ const BandDashboard = () => {
     }
   }, [embeddedYouTubeVideo]);
 
-  const handleBandUpdate = async (spotifyId: string) => {
+  const handleSpotifyIdUpdate = async (spotifyId: string) => {
     await mutations.updateBandMutation({
       id: bandData.band?.id,
       spotifyId: spotifyId,
+    });
+  };
+
+  const handleYouTubeEmbedIdUpdate = async (youTubeEmbedId: string) => {
+    await mutations.updateBandMutation({
+      id: bandData.band?.id,
+      youTubeEmbedId: youTubeEmbedId,
     });
   };
 
@@ -71,7 +78,7 @@ const BandDashboard = () => {
   }
 
   return (
-    <div className="flex flex-col items-start gap-4 p-4">
+    <div className="flex flex-col items-start gap-4 px-4 pb-4">
       <h1 className="text-4xl font-medium ml-4">Dashboard</h1>
       <Card className="w-full p-4 flex flex-col gap-4">
         <CardHeader className="flex flex-row justify-left items-center h-[300px] gap-4">
@@ -101,10 +108,10 @@ const BandDashboard = () => {
                 </span>
                 {bandData.band?.spotifyId}
               </div>
-              {embeddedYouTubeVideo ? (
+              {bandData.band?.youTubeEmbedId ? (
                 <iframe
                   className="w-[420px] aspect-video rounded-lg"
-                  src={`https://www.youtube.com/embed/${embeddedYouTubeVideo}`}
+                  src={`https://www.youtube.com/embed/${bandData.band?.youTubeEmbedId}`}
                   title="YouTube video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
@@ -114,7 +121,7 @@ const BandDashboard = () => {
                 <Card className="p-2 flex-1 flex flex-col items-center justify-center gap-2">
                   <FaYoutube className="text-[#FF0000]" size={50} />
                   <YouTubeEmbedDialog
-                    setEmbeddedYouTubeVideo={setEmbeddedYouTubeVideo}
+                    handleYouTubeEmbedIdUpdate={handleYouTubeEmbedIdUpdate}
                   />
                 </Card>
               )}
@@ -174,7 +181,9 @@ const BandDashboard = () => {
                     ></iframe>
                   </>
                 ) : (
-                  <ConnectSpotifyDialog handleBandUpdate={handleBandUpdate} />
+                  <ConnectSpotifyDialog
+                    handleSpotifyIdUpdate={handleSpotifyIdUpdate}
+                  />
                 )}
               </CardHeader>
             </Card>

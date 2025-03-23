@@ -11,15 +11,15 @@ import {
 } from "@/components/shadcn/Dialog";
 import { Button } from "@/components/shadcn/Button";
 import { Input } from "@/components/shadcn/Input";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getYouTubeVideoId } from "@/utils/helpers";
 
 interface YouTubeEmbedDialogProps {
-  setEmbeddedYouTubeVideo: Dispatch<React.SetStateAction<string | null>>;
+  handleYouTubeEmbedIdUpdate: (youTubeEmbedId: string) => Promise<void>;
 }
 
 const YouTubeEmbedDialog = ({
-  setEmbeddedYouTubeVideo,
+  handleYouTubeEmbedIdUpdate,
 }: YouTubeEmbedDialogProps) => {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -31,6 +31,12 @@ const YouTubeEmbedDialog = ({
   const handleEmbed = () => {
     const id = getYouTubeVideoId(videoUrl);
     setVideoId(id);
+  };
+
+  const handleYouTubeEmbedSubmit = async () => {
+    if (videoId) {
+      await handleYouTubeEmbedIdUpdate(videoId);
+    }
   };
 
   useEffect(() => {
@@ -72,10 +78,7 @@ const YouTubeEmbedDialog = ({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button
-              type="submit"
-              onClick={() => setEmbeddedYouTubeVideo(videoId)}
-            >
+            <Button type="submit" onClick={handleYouTubeEmbedSubmit}>
               Confirm
             </Button>
           </DialogClose>
