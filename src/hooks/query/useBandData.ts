@@ -33,6 +33,9 @@ const useBandData = (userId: string) => {
       queryClient.invalidateQueries({
         queryKey: ["band", userId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["bandSpotify", band?.id],
+      });
     },
   });
 
