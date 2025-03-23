@@ -49,10 +49,12 @@ const BandDashboard = () => {
 
   const handleSpotifyIdUpdate = async (spotifyId: string) => {
     try {
-      await mutations.updateBandMutation({
-        id: bandData.band?.id,
-        spotifyId,
-      });
+      const formData = new FormData();
+      formData.append("id", bandData.band?.id || "");
+      formData.append("spotifyId", spotifyId);
+
+      await mutations.updateBandMutation(formData);
+
       useToast("Spotify connection successful", 5000);
     } catch (error) {
       useToast(
@@ -67,10 +69,12 @@ const BandDashboard = () => {
 
   const handleYouTubeEmbedIdUpdate = async (youTubeEmbedId: string) => {
     try {
-      await mutations.updateBandMutation({
-        id: bandData.band?.id,
-        youTubeEmbedId,
-      });
+      const formData = new FormData();
+      formData.append("id", bandData.band?.id || "");
+      formData.append("youTubeEmbedId", youTubeEmbedId);
+
+      await mutations.updateBandMutation(formData);
+
       useToast("YouTube video successfully embedded", 5000);
     } catch (error) {
       useToast(

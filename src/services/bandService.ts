@@ -6,6 +6,6 @@ export const getBand = async (userId: string): Promise<Band> => {
   return (await axios.get(`${ENDPOINTS.BAND}/user/${userId}`)).data;
 };
 
-export const updateBand = async (updateData: { [key: string]: any }) => {
+export const updateBand = async (updateData: FormData) => {
   await axios.put(`${ENDPOINTS.BANDUPDATE}`, updateData);
 };
