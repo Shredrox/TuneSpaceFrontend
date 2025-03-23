@@ -60,8 +60,8 @@ const BandRegistrationForm = ({ locationData }: { locationData: any }) => {
     };
 
     try {
-      const bandId = await registerBand(combinedRequest);
-      router.push(`/band/dashboard/${bandId}`);
+      await registerBand(combinedRequest);
+      router.push("/band/dashboard");
     } catch (error: any) {
       handleRequestError(error);
     }
