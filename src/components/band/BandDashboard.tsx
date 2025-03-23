@@ -42,10 +42,6 @@ const BandDashboard = () => {
   }, []);
 
   useEffect(() => {
-    console.log(bandData);
-  }, [bandData]);
-
-  useEffect(() => {
     if (mounted) {
       useToast(
         "Welcome to the Band Dashboard! Here you can manage your band activities as well as add additional info for your band."
