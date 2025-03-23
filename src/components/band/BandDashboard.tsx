@@ -25,6 +25,7 @@ import useBandData from "@/hooks/query/useBandData";
 import Loading from "../fallback/Loading";
 import useToast from "@/hooks/useToast";
 import ConnectSpotifyDialog from "./ConnectSpotifyDialog";
+import EditBandDialog from "./EditBandDialog";
 
 const BandDashboard = () => {
   const { auth } = useAuth();
@@ -32,9 +33,6 @@ const BandDashboard = () => {
   const { bandData, mutations, isBandLoading, isBandError, bandError } =
     useBandData(auth?.id || "");
 
-  const [embeddedYouTubeVideo, setEmbeddedYouTubeVideo] = useState<
-    string | null
-  >(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -49,24 +47,68 @@ const BandDashboard = () => {
     }
   }, [mounted]);
 
-  useEffect(() => {
-    if (embeddedYouTubeVideo) {
-      useToast("YouTube video successfully embedded!", 5000);
-    }
-  }, [embeddedYouTubeVideo]);
-
   const handleSpotifyIdUpdate = async (spotifyId: string) => {
-    await mutations.updateBandMutation({
-      id: bandData.band?.id,
-      spotifyId: spotifyId,
-    });
+    try {
+      await mutations.updateBandMutation({
+        id: bandData.band?.id,
+        spotifyId,
+      });
+      useToast("Spotify connection successful", 5000);
+    } catch (error) {
+      useToast(
+        `Failed to connect Spotify: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        5000
+      );
+      console.error("Spotify connection error:", error);
+    }
   };
 
   const handleYouTubeEmbedIdUpdate = async (youTubeEmbedId: string) => {
-    await mutations.updateBandMutation({
-      id: bandData.band?.id,
-      youTubeEmbedId: youTubeEmbedId,
-    });
+    try {
+      await mutations.updateBandMutation({
+        id: bandData.band?.id,
+        youTubeEmbedId,
+      });
+      useToast("YouTube video successfully embedded", 5000);
+    } catch (error) {
+      useToast(
+        `Failed to update YouTube embed: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        5000
+      );
+      console.error("YouTube embed update error:", error);
+    }
+  };
+
+  const handleBandUpdate = async (updatedBand: any) => {
+    try {
+      const formData = new FormData();
+      formData.append("id", bandData.band?.id || "");
+      formData.append("name", updatedBand.name || "");
+      formData.append("description", updatedBand.description || "");
+      formData.append("genre", updatedBand.genre || "");
+      formData.append("spotifyId", updatedBand.spotifyId || "");
+      formData.append("youTubeEmbedId", updatedBand.youTubeEmbedId || "");
+
+      if (updatedBand.picture) {
+        formData.append("picture", updatedBand.picture);
+      }
+
+      await mutations.updateBandMutation(formData);
+
+      useToast("Band information updated successfully", 5000);
+    } catch (error) {
+      useToast(
+        `Failed to update band: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+        5000
+      );
+      console.error("Band update error:", error);
+    }
   };
 
   if (isBandLoading) {
@@ -102,7 +144,10 @@ const BandDashboard = () => {
                 <span className="text-lg">
                   {bandData.band?.country}, {bandData.band?.city}
                 </span>
-                {bandData.band?.spotifyId}
+                <EditBandDialog
+                  band={bandData?.band}
+                  handleBandUpdate={handleBandUpdate}
+                />
               </div>
               {bandData.band?.youTubeEmbedId ? (
                 <iframe
