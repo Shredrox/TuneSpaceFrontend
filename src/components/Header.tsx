@@ -17,19 +17,21 @@ import {
 } from "@/components/shadcn/DropdownMenu";
 import { LogOut, User } from "lucide-react";
 import SpotifySearchBar from "./SpotifySearchBar";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { LuMusic4 } from "react-icons/lu";
-
-import Link from "next/link";
 import Navigation from "./Navigation";
 import { SidebarTrigger } from "./shadcn/Sidebar";
+import useAuth from "@/hooks/useAuth";
 
 const Header = () => {
+  const { auth } = useAuth();
+
+  const router = useRouter();
   const logout = useLogout();
 
   const handleLogout = async () => {
-    //await logout();
-    redirect("/");
+    await logout();
+    router.push("/");
   };
 
   return (
@@ -60,7 +62,9 @@ const Header = () => {
             <DropdownMenuContent onCloseAutoFocus={(e) => e.preventDefault()}>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => redirect("/profile/hello")}>
+              <DropdownMenuItem
+                onClick={() => router.push(`/profile/${auth.username}`)}
+              >
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </DropdownMenuItem>

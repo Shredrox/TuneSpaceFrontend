@@ -1,3 +1,9 @@
-export default function Home() {
-  return <div>Discover</div>;
+import DiscoveryList from "@/components/home/DiscoveryList";
+
+export default async function Home() {
+  return (
+    <div>
+      <DiscoveryList />
+    </div>
+  );
 }

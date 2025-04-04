@@ -2,7 +2,7 @@
 
 const Loading = () => {
   return (
-    <div>
+    <div className="h-[200px]">
       <span
         className="loader bg-secondary-foreground 
       after:bg-secondary-foreground 

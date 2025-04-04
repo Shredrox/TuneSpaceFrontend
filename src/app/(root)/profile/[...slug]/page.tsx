@@ -2,18 +2,40 @@ import { IoMusicalNote } from "react-icons/io5";
 import { FaGuitar, FaSpotify } from "react-icons/fa";
 import useSpotifyProfileData from "@/hooks/query/useSpotifyProfileData";
 import Loading from "@/components/fallback/Loading";
+import { SPOTIFY_ENDPOINTS } from "@/utils/constants";
+import axios from "@/axios/axios";
+import { cookies } from "next/headers";
+import { getUserByName } from "@/services/userService";
 
 export default async function Profile({
   params,
 }: {
-  params: Promise<{ username: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const username = (await params).username;
+  const { slug } = await params;
 
-  const { spotifyProfileData, isSpotifyProfileLoading } =
-    useSpotifyProfileData();
+  const user = await getUserByName(slug);
 
-  if (isSpotifyProfileLoading) {
+  const cookie = (await cookies()).get("SpotifyAccessToken");
+
+  let spotifyProfileData = null;
+
+  if (cookie) {
+    try {
+      spotifyProfileData = (
+        await axios.get(SPOTIFY_ENDPOINTS.PROFILE, {
+          withCredentials: true,
+          headers: {
+            Cookie: `SpotifyAccessToken=${cookie.value}`,
+          },
+        })
+      ).data;
+    } catch (error) {
+      console.error("Error fetching Spotify profile:", error);
+    }
+  }
+
+  if (!spotifyProfileData) {
     return <Loading />;
   }
 
@@ -22,10 +44,15 @@ export default async function Profile({
       <div className="flex flex-col justify-center items-center gap-4">
         <img
           className="rounded-full w-[200px] h-[200px]"
-          src={spotifyProfileData?.profile?.profilePicture}
+          src={
+            user?.profilePicture || spotifyProfileData?.profile?.profilePicture
+          }
           alt=""
         />
-        <h2 className="text-2xl">{spotifyProfileData?.profile?.username} </h2>
+        {/* <h2 className="text-2xl">
+          {spotifyProfileData?.profile?.username}{" "}
+        </h2> */}
+        <h2>{user?.userName}</h2>
       </div>
       <div className="flex flex-col gap-4 bg-gray-800 p-4 rounded-2xl">
         <span className="flex items-center gap-2">

@@ -1,6 +1,6 @@
 import UserSearchResult from "@/interfaces/user/UserSearchResult";
-import axios from "../axios/axios";
 import UserProfile from "../interfaces/UserProfile";
+import axios from "@/axios/axios";
 
 interface FollowData {
   loggedInUser: string;
@@ -11,6 +11,11 @@ export const getUserProfile = async (
   username: string
 ): Promise<UserProfile> => {
   const response = await axios.get(`/User/${username}/profile`);
+  return response.data;
+};
+
+export const getUserByName = async (username: string) => {
+  const response = await axios.get(`User/${username}`);
   return response.data;
 };
 

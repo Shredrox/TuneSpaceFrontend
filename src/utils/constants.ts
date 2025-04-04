@@ -11,6 +11,8 @@ export const ENDPOINTS = {
   BANDREGISTER: "Band/register",
   BANDUPDATE: "Band/update",
   BAND: "Band",
+  RECOMMENDATIONS: "MusicDiscovery/recommendations",
+  DISCOVER: "MusicDiscovery/discover",
 } as const;
 
 export const SPOTIFY_ENDPOINTS = {
@@ -18,6 +20,7 @@ export const SPOTIFY_ENDPOINTS = {
   SEARCH: "Spotify/search",
   PROFILE: "Spotify/profile",
   ARTIST: "Spotify/artist",
+  ARTISTS: "Spotify/artists",
 } as const;
 
 export enum UserRole {
