@@ -2,6 +2,8 @@ export const BASE_URL = "http://localhost:5053/api";
 
 export const ROUTES = {
   HOME: "/",
+  NEWS: "/news",
+  BAND_DASHBOARD: "/band/dashboard",
 } as const;
 
 export const ENDPOINTS = {
