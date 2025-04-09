@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/shadcn/Button";
+import { Button } from "@/components/shadcn/button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuList,
-} from "@/components/shadcn/NavigationMenu";
+} from "@/components/shadcn/navigation-menu";
 import { DiscAlbum, House, Newspaper } from "lucide-react";
 import { ROUTES } from "@/utils/constants";
 

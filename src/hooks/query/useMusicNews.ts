@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getMusicNews } from "@/services/newsService";
+import { getMusicNews } from "@/services/news-service";
 import { useState } from "react";
 
 const useMusicNews = (initialPage: number = 1, pageSize: number = 12) => {

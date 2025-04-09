@@ -1,31 +1,31 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/Avatar";
+import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/avatar";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "../shadcn/Card";
-import { Separator } from "../shadcn/Separator";
+} from "../shadcn/card";
+import { Separator } from "../shadcn/separator";
 import { FaSpotify, FaYoutube } from "react-icons/fa";
 import { SiTidal, SiApplemusic } from "react-icons/si";
-import YouTubeEmbedDialog from "./YouTubeEmbedDialog";
+import YouTubeEmbedDialog from "./youtube-embed-dialog";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../shadcn/Carousel";
+} from "../shadcn/carousel";
 import useAuth from "@/hooks/useAuth";
 import useBandData from "@/hooks/query/useBandData";
-import Loading from "../fallback/Loading";
+import Loading from "../fallback/loading";
 import useToast from "@/hooks/useToast";
-import ConnectSpotifyDialog from "./ConnectSpotifyDialog";
-import EditBandDialog from "./EditBandDialog";
+import ConnectSpotifyDialog from "./connect-spotify-dialog";
+import EditBandDialog from "./edit-band-dialog";
 
 const BandDashboard = () => {
   const { auth } = useAuth();

@@ -1,8 +1,8 @@
-import axios from "@/axios/axios";
-import BandRegistrationForm from "@/components/band/BandRegistrationForm";
+import BandRegistrationForm from "@/components/band/band-registration-form";
+import httpClient from "@/services/http-client";
 
-export default async function Page() {
-  const countryData = await axios.get(
+export default async function BandRegisterPage() {
+  const countryData = await httpClient.get(
     "https://countriesnow.space/api/v0.1/countries"
   );
 

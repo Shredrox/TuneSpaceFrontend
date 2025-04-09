@@ -2,11 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/shadcn/Input";
-import { Card } from "@/components/shadcn/Card";
-import Loading from "./fallback/Loading";
+import { Input } from "@/components/shadcn/input";
+import { Card } from "@/components/shadcn/card";
+import Loading from "./fallback/loading";
 import Image from "next/image";
-import { getSpotifySongsBySearch } from "@/services/spotifyService";
+import { getSpotifySongsBySearch } from "@/services/spotify-service";
 
 const SpotifySearchBar = () => {
   const [search, setSearch] = useState("");

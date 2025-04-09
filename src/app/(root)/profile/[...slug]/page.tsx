@@ -1,11 +1,11 @@
 import { IoMusicalNote } from "react-icons/io5";
 import { FaGuitar, FaSpotify } from "react-icons/fa";
 import useSpotifyProfileData from "@/hooks/query/useSpotifyProfileData";
-import Loading from "@/components/fallback/Loading";
+import Loading from "@/components/fallback/loading";
 import { SPOTIFY_ENDPOINTS } from "@/utils/constants";
-import axios from "@/axios/axios";
 import { cookies } from "next/headers";
-import { getUserByName } from "@/services/userService";
+import { getUserByName } from "@/services/user-service";
+import httpClient from "@/services/http-client";
 
 export default async function Profile({
   params,
@@ -23,7 +23,7 @@ export default async function Profile({
   if (cookie) {
     try {
       spotifyProfileData = (
-        await axios.get(SPOTIFY_ENDPOINTS.PROFILE, {
+        await httpClient.get(SPOTIFY_ENDPOINTS.PROFILE, {
           withCredentials: true,
           headers: {
             Cookie: `SpotifyAccessToken=${cookie.value}`,

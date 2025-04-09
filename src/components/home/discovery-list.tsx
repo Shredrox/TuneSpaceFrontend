@@ -1,10 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "@/axios/axios";
 import { ENDPOINTS } from "@/utils/constants";
-import Loading from "../fallback/Loading";
+import Loading from "../fallback/loading";
 import { useState } from "react";
+import httpClient from "@/services/http-client";
 
 interface DiscoveryArtist {
   name: string;
@@ -33,7 +33,7 @@ const fetchDiscover = async (
     url += `&location=${encodeURIComponent(location)}`;
   }
 
-  const response = await axios.get(url);
+  const response = await httpClient.get(url);
   return response.data;
 };
 

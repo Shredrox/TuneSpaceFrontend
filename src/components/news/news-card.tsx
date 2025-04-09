@@ -8,9 +8,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/shadcn/Card";
-import { Badge } from "@/components/shadcn/Badge";
-import { Button } from "@/components/shadcn/Button";
+} from "@/components/shadcn/card";
+import { Badge } from "@/components/shadcn/badge";
+import { Button } from "@/components/shadcn/button";
 import { ExternalLink } from "lucide-react";
 import { getTimeAgo } from "@/utils/helpers";
 

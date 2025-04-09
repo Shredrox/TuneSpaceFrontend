@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import useMusicNews from "@/hooks/query/useMusicNews";
-import NewsCard from "@/components/news/NewsCard";
-import Loading from "@/components/fallback/Loading";
-import { Button } from "@/components/shadcn/Button";
-import { Input } from "@/components/shadcn/Input";
+import NewsCard from "@/components/news/news-card";
+import Loading from "@/components/fallback/loading";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
 import { FiSearch, FiRefreshCw } from "react-icons/fi";
 
 export default function NewsPage() {

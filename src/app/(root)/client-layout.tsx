@@ -1,10 +1,10 @@
 "use client";
 
-import { AppSidebar } from "@/components/AppSidebar";
-import Header from "@/components/Header";
-import { AuthForm } from "@/components/auth/AuthForm";
-import Loading from "@/components/fallback/Loading";
-import { SidebarProvider } from "@/components/shadcn/Sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import Header from "@/components/header";
+import { AuthForm } from "@/components/auth/auth-form";
+import Loading from "@/components/fallback/loading";
+import { SidebarProvider } from "@/components/shadcn/sidebar";
 import useAuth from "@/hooks/useAuth";
 import useRefreshToken from "@/hooks/useRefreshToken";
 import { useEffect, useState } from "react";

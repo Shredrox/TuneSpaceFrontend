@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import FormInput from "../FormInput";
+import FormInput from "../form-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Textarea } from "../shadcn/Textarea";
-import { Button } from "../shadcn/Button";
+import { Textarea } from "../shadcn/textarea";
+import { Button } from "../shadcn/button";
 import {
   BandRegisterInputs,
   bandRegisterSchema,
@@ -17,10 +17,10 @@ import {
   Select,
   SelectItem,
   SelectValue,
-} from "../shadcn/Select";
+} from "../shadcn/select";
 import useLocationData from "@/hooks/useLocationData";
-import { Input } from "../shadcn/Input";
-import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/Avatar";
+import { Input } from "../shadcn/input";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/avatar";
 import { registerBand } from "@/actions/band";
 import useAuth from "@/hooks/useAuth";
 

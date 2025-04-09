@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import FormInput from "../FormInput";
+import FormInput from "../form-input";
 import { useState } from "react";
 //import axios from '../../axios/axios';
 

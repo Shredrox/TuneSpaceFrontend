@@ -1,12 +1,12 @@
 "use client";
 
 import useLogout from "../hooks/useLogout";
-import { ModeToggle } from "@/components/shadcn/ModeToggle";
+import { ModeToggle } from "@/components/shadcn/mode-toggle";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/shadcn/Avatar";
+} from "@/components/shadcn/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +14,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/shadcn/DropdownMenu";
+} from "@/components/shadcn/dropdownMenu";
 import { LogOut, User } from "lucide-react";
-import SpotifySearchBar from "./SpotifySearchBar";
+import SpotifySearchBar from "./spotify-search-bar";
 import { useRouter } from "next/navigation";
 import { LuMusic4 } from "react-icons/lu";
-import Navigation from "./Navigation";
-import { SidebarTrigger } from "./shadcn/Sidebar";
+import Navigation from "./navigation";
+import { SidebarTrigger } from "./shadcn/sidebar";
 import useAuth from "@/hooks/useAuth";
 
 const Header = () => {

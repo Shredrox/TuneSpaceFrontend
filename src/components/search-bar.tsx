@@ -2,11 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/shadcn/Input";
-import { Card } from "@/components/shadcn/Card";
-import Loading from "./fallback/Loading";
-import { Avatar, AvatarFallback, AvatarImage } from "./shadcn/Avatar";
-import { getUsersByNameSearch } from "@/services/userService";
+import { Input } from "@/components/shadcn/input";
+import { Card } from "@/components/shadcn/card";
+import Loading from "./fallback/loading";
+import { Avatar, AvatarFallback, AvatarImage } from "./shadcn/avatar";
+import { getUsersByNameSearch } from "@/services/user-service";
 import { useRouter } from "next/navigation";
 
 const SearchBar = () => {

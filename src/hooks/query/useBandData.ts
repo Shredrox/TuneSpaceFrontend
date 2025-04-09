@@ -1,5 +1,5 @@
-import { getBand, updateBand } from "@/services/bandService";
-import { getSpotifyArtist } from "@/services/spotifyService";
+import { getBand, updateBand } from "@/services/band-service";
+import { getSpotifyArtist } from "@/services/spotify-service";
 import { isNullOrEmpty } from "@/utils/helpers";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

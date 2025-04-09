@@ -8,13 +8,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/shadcn/Dialog";
-import { Button } from "@/components/shadcn/Button";
-import { Input } from "@/components/shadcn/Input";
+} from "@/components/shadcn/dialog";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
 import { useState } from "react";
 import Band from "@/interfaces/Band";
-import { Label } from "../shadcn/Label";
-import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/Avatar";
+import { Label } from "../shadcn/label";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/avatar";
 
 interface EditBandDialogProps {
   band: Band | undefined;

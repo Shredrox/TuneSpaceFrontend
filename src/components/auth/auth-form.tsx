@@ -1,13 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/shadcn/Button";
-import { Card, CardContent } from "@/components/shadcn/Card";
+import { Button } from "@/components/shadcn/button";
+import { Card, CardContent } from "@/components/shadcn/card";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
-import Login from "./Login";
-import Register from "./Register";
+import Register from "./register-form";
+import Login from "./login-form";
 
 export function AuthForm({ className, ...props }: React.ComponentProps<"div">) {
   const [formStep, setFormStep] = useState(0);

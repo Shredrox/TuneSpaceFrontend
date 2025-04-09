@@ -9,7 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/shadcn/Sidebar";
+} from "@/components/shadcn/sidebar";
 
 export function AppSidebar() {
   return (

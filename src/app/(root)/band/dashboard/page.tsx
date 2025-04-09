@@ -1,4 +1,4 @@
-import BandDashboard from "@/components/band/BandDashboard";
+import BandDashboard from "@/components/band/band-dashboard";
 
 export default async function BandDashboardPage() {
   return (
