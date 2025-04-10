@@ -46,3 +46,17 @@ export const getTimeAgo = (dateString: string | null): string => {
   const diffInYears = Math.floor(diffInDays / 365);
   return `${diffInYears} year${diffInYears > 1 ? "s" : ""} ago`;
 };
+
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: false,
+  };
+
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+};
