@@ -14,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/shadcn/dropdownMenu";
+} from "@/components/shadcn/dropdown-menu";
 import { LogOut, User } from "lucide-react";
 import SpotifySearchBar from "./spotify-search-bar";
 import { useRouter } from "next/navigation";
