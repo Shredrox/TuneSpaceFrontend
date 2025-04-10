@@ -18,18 +18,23 @@ const Navigation = () => {
   };
 
   const linksData = [
-    { id: 1, to: ROUTES.HOME, text: "Home", icon: <House /> },
+    {
+      id: 1,
+      to: ROUTES.HOME,
+      text: "Home",
+      icon: <House className="w-6 h-6" />,
+    },
     {
       id: 2,
       to: ROUTES.BAND_DASHBOARD,
       text: "Dashboard",
-      icon: <DiscAlbum />,
+      icon: <DiscAlbum className="w-6 h-6" />,
     },
     {
       id: 3,
       to: ROUTES.NEWS,
       text: "News",
-      icon: <Newspaper />,
+      icon: <Newspaper className="w-6 h-6" />,
     },
   ];
 
