@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/shadcn/input";
 import { Card } from "@/components/shadcn/card";
-import Loading from "./fallback/oh-loading";
+import Loading from "./fallback/loading";
 import Image from "next/image";
 import { getSpotifySongsBySearch } from "@/services/spotify-service";
 import { Button } from "@/components/shadcn/button";

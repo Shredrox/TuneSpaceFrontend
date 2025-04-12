@@ -22,7 +22,7 @@ import {
 } from "../shadcn/carousel";
 import useAuth from "@/hooks/useAuth";
 import useBandData from "@/hooks/query/useBandData";
-import Loading from "../fallback/oh-loading";
+import Loading from "../fallback/loading";
 import useToast from "@/hooks/useToast";
 import ConnectSpotifyDialog from "./connect-spotify-dialog";
 import EditBandDialog from "./edit-band-dialog";

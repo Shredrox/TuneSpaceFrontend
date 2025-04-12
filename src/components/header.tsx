@@ -19,7 +19,7 @@ import { LogOut, User } from "lucide-react";
 import SpotifySearchBar from "./spotify-search-bar";
 import { useRouter } from "next/navigation";
 import { LuMusic4 } from "react-icons/lu";
-import Navigation from "./oh-navigation";
+import Navigation from "./navigation";
 import { SidebarTrigger } from "./shadcn/sidebar";
 import useAuth from "@/hooks/useAuth";
 
