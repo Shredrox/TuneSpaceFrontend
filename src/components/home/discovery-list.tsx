@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { ENDPOINTS } from "@/utils/constants";
-import Loading from "../fallback/loading";
+import Loading from "../fallback/oh-loading";
 import { useState } from "react";
 import httpClient from "@/services/http-client";
 

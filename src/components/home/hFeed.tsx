@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/avatar";
-import { Badge } from "../shadcn/badge";
+import { Badge } from "../shadcn/hBadge";
 import {
   Card,
   CardContent,

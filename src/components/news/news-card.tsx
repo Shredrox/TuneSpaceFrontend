@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
-import { Badge } from "@/components/shadcn/badge";
+import { Badge } from "@/components/shadcn/hBadge";
 import { Button } from "@/components/shadcn/button";
 import { ExternalLink } from "lucide-react";
 import { getTimeAgo } from "@/utils/helpers";
