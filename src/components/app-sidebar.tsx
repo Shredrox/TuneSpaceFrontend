@@ -54,7 +54,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r">
       <SidebarHeader className="pb-2">
-        <div className="flex items-center gap-2 px-2">
+        <div className="flex items-center justify-center md:justify-start gap-2 px-2">
           <Avatar className="h-9 w-9 bg-gradient-to-br from-blue-500 to-purple-600">
             <AvatarImage src="/logo.png" alt="TuneSpace" />
             <AvatarFallback>TS</AvatarFallback>
@@ -201,10 +201,10 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <DropdownMenuTrigger>
+                    <SidebarMenuButton tooltip="More">
                       <MoreHorizontal className="h-4 w-4" />
                       <span>More</span>
-                    </DropdownMenuTrigger>
+                    </SidebarMenuButton>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48">
                     <DropdownMenuLabel>Account</DropdownMenuLabel>
