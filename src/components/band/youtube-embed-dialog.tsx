@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/shadcn/Dialog";
-import { Button } from "@/components/shadcn/Button";
-import { Input } from "@/components/shadcn/Input";
+} from "@/components/shadcn/dialog";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
 import { useEffect, useState } from "react";
 import { getYouTubeVideoId } from "@/utils/helpers";
 

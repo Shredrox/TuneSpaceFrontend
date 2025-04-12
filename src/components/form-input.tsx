@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldValues, Path, UseFormRegister } from "react-hook-form";
-import { Input } from "./shadcn/Input";
+import { Input } from "./shadcn/input";
 
 interface InputProps<T extends FieldValues> {
   type: string;

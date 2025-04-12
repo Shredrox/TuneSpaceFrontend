@@ -1,6 +1,6 @@
 "use server";
 
-import axios from "@/axios/axios";
+import httpClient from "@/services/http-client";
 import { ENDPOINTS } from "@/utils/constants";
 
 export const registerBand = async (data: { [key: string]: any }) => {
@@ -9,9 +9,13 @@ export const registerBand = async (data: { [key: string]: any }) => {
     formData.append(key, data[key]);
   }
 
-  const response = await axios.post(`${ENDPOINTS.BANDREGISTER}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const response = await httpClient.post(
+    `${ENDPOINTS.BANDREGISTER}`,
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    }
+  );
 
   return response.data;
 };

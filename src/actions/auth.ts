@@ -1,7 +1,7 @@
 "use server";
 
-import axios from "@/axios/axios";
 import { registerSchema } from "@/schemas/register.schema";
+import httpClient from "@/services/http-client";
 import { ENDPOINTS } from "@/utils/constants";
 
 export const registerUser = async (data: FormData) => {
@@ -12,7 +12,7 @@ export const registerUser = async (data: FormData) => {
     throw new Error("Invalid data");
   }
 
-  await axios.post(`${ENDPOINTS.REGISTER}`, JSON.stringify(parsed.data), {
+  await httpClient.post(`${ENDPOINTS.REGISTER}`, JSON.stringify(parsed.data), {
     headers: { "Content-Type": "application/json" },
   });
 };

@@ -2,6 +2,8 @@ export const BASE_URL = "http://localhost:5053/api";
 
 export const ROUTES = {
   HOME: "/",
+  NEWS: "/news",
+  BAND_DASHBOARD: "/band/dashboard",
 } as const;
 
 export const ENDPOINTS = {
@@ -11,6 +13,8 @@ export const ENDPOINTS = {
   BANDREGISTER: "Band/register",
   BANDUPDATE: "Band/update",
   BAND: "Band",
+  RECOMMENDATIONS: "MusicDiscovery/recommendations",
+  DISCOVER: "MusicDiscovery/discover",
 } as const;
 
 export const SPOTIFY_ENDPOINTS = {
@@ -18,6 +22,8 @@ export const SPOTIFY_ENDPOINTS = {
   SEARCH: "Spotify/search",
   PROFILE: "Spotify/profile",
   ARTIST: "Spotify/artist",
+  ARTISTS: "Spotify/artists",
+  RECENTLY_PLAYED: "Spotify/recently-played",
 } as const;
 
 export enum UserRole {

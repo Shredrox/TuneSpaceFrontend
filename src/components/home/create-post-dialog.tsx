@@ -8,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/shadcn/Dialog";
-import { Button } from "@/components/shadcn/Button";
-import { Input } from "@/components/shadcn/Input";
-import { Textarea } from "@/components/shadcn/Textarea";
+} from "@/components/shadcn/dialog";
+import { Button } from "@/components/shadcn/button";
+import { Input } from "@/components/shadcn/input";
+import { Textarea } from "@/components/shadcn/textarea";
 
 const CreatePostDialog = () => {
   return (

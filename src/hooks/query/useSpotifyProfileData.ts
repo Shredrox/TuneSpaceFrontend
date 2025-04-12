@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSpotifyProfile } from "../../services/spotifyService";
+import { getSpotifyProfile } from "../../services/spotify-service";
 
 const useSpotifyProfileData = () => {
   const {

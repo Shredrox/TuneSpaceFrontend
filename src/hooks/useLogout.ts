@@ -1,4 +1,4 @@
-import axios from "@/axios/axios";
+import httpClient from "@/services/http-client";
 import useAuth from "./useAuth";
 import { ENDPOINTS } from "@/utils/constants";
 
@@ -9,7 +9,7 @@ const useLogout = () => {
     setAuth({});
 
     try {
-      await axios.post(`${ENDPOINTS.LOGOUT}`, {});
+      await httpClient.post(`${ENDPOINTS.LOGOUT}`, {});
     } catch (error) {
       console.log(error);
     }

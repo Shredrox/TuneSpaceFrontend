@@ -1,15 +1,14 @@
 "use client";
 
-import { SiMusicbrainz } from "react-icons/si";
-import { IoHome } from "react-icons/io5";
-import { Button } from "@/components/shadcn/Button";
+import { Button } from "@/components/shadcn/button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuList,
-} from "@/components/shadcn/NavigationMenu";
-import { Separator } from "./shadcn/Separator";
+} from "@/components/shadcn/navigation-menu";
+import { DiscAlbum, House, Newspaper } from "lucide-react";
+import { ROUTES } from "@/utils/constants";
 
 const Navigation = () => {
   const location = usePathname();
@@ -19,12 +18,23 @@ const Navigation = () => {
   };
 
   const linksData = [
-    { id: 1, to: "/", text: "Home", icon: <IoHome /> },
+    {
+      id: 1,
+      to: ROUTES.HOME,
+      text: "Home",
+      icon: <House className="w-6 h-6" />,
+    },
     {
       id: 2,
-      to: "/band/dashboard",
+      to: ROUTES.BAND_DASHBOARD,
       text: "Dashboard",
-      icon: <SiMusicbrainz />,
+      icon: <DiscAlbum className="w-6 h-6" />,
+    },
+    {
+      id: 3,
+      to: ROUTES.NEWS,
+      text: "News",
+      icon: <Newspaper className="w-6 h-6" />,
     },
   ];
 
@@ -49,7 +59,6 @@ const Navigation = () => {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-      <ul className="flex flex-col gap-2"></ul>
     </div>
   );
 };

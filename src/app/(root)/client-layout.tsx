@@ -1,10 +1,13 @@
 "use client";
 
-import { AppSidebar } from "@/components/AppSidebar";
-import Header from "@/components/Header";
-import { AuthForm } from "@/components/auth/AuthForm";
-import { SidebarProvider } from "@/components/shadcn/Sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import Header from "@/components/header";
+import { AuthForm } from "@/components/auth/auth-form";
+import Loading from "@/components/fallback/loading";
+import { SidebarProvider } from "@/components/shadcn/sidebar";
 import useAuth from "@/hooks/useAuth";
+import useRefreshToken from "@/hooks/useRefreshToken";
+import { useEffect, useState } from "react";
 
 export default function MainClientLayout({
   children,
@@ -13,6 +16,27 @@ export default function MainClientLayout({
 }) {
   const { auth } = useAuth();
 
+  const [isLoading, setIsLoading] = useState(true);
+  const refresh = useRefreshToken();
+
+  useEffect(() => {
+    const verifyRefreshToken = async () => {
+      try {
+        await refresh();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (auth.accessToken) {
     return (
       <>
@@ -20,7 +44,7 @@ export default function MainClientLayout({
           <AppSidebar />
           <main className="relative flex w-full flex-1 flex-col bg-background md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow">
             <Header />
-            <div className="p-4">{children}</div>
+            <div>{children}</div>
           </main>
         </SidebarProvider>
       </>

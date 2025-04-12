@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/Avatar";
-import { Badge } from "../shadcn/Badge";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/avatar";
+import { Badge } from "../shadcn/badge";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../shadcn/Card";
+} from "../shadcn/card";
 import { FaRegHeart, FaCommentAlt } from "react-icons/fa";
 
 const Feed = () => {

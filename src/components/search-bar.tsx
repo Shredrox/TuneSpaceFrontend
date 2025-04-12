@@ -2,23 +2,25 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/shadcn/Input";
-import { Card } from "@/components/shadcn/Card";
-import Loading from "./fallback/Loading";
-import Image from "next/image";
-import { getSpotifySongsBySearch } from "@/services/spotifyService";
+import { Input } from "@/components/shadcn/input";
+import { Card } from "@/components/shadcn/card";
+import Loading from "./fallback/loading";
+import { Avatar, AvatarFallback, AvatarImage } from "./shadcn/avatar";
+import { getUsersByNameSearch } from "@/services/user-service";
+import { useRouter } from "next/navigation";
 
-const SpotifySearchBar = () => {
+const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   const {
-    data: searchSongs,
+    data: searchUsers,
     isError,
     error,
     refetch,
   } = useQuery({
     queryKey: ["searchUsers", search],
-    queryFn: () => getSpotifySongsBySearch(search),
+    queryFn: () => getUsersByNameSearch(search),
     enabled: false,
     retry: 1,
   });
@@ -34,7 +36,7 @@ const SpotifySearchBar = () => {
   }, [search]);
 
   return (
-    <div className="w-96">
+    <div className="w-full">
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -43,28 +45,27 @@ const SpotifySearchBar = () => {
       {search !== "" && (
         <Card
           className="w-full flex flex-col justify-center gap-3 
-      top-12 max-h-[800px] absolute 
-      z-10 p-4 overflow-y-scroll overflow-auto rounded-2xl"
+      top-12 max-h-[500px] absolute z-10 p-4 overflow-y-scroll overflow-auto rounded-2xl"
         >
-          {searchSongs?.length! > 0 ? (
-            searchSongs?.map((song, index) => (
+          {searchUsers?.length! > 0 ? (
+            searchUsers?.map((user, index) => (
               <Card
                 key={index}
-                onClick={() => setSearch("")}
+                onClick={() => {
+                  router.push(`/profile/${user.name}`);
+                  setSearch("");
+                }}
                 className="p-4 flex items-center gap-3 cursor-pointer"
               >
-                <Image
-                  className="w-[50px] h-[50px] rounded"
-                  src={song.albumArt}
-                  alt=""
-                />
-                <span>
-                  {song.artist} - {song.name}
-                </span>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>{user.name}</AvatarFallback>
+                </Avatar>
+                {user.name}
               </Card>
             ))
-          ) : searchSongs?.length === 0 ? (
-            "No Songs Found"
+          ) : searchUsers?.length === 0 ? (
+            "User Not Found"
           ) : isError ? (
             <p>{error.message}</p>
           ) : (
@@ -78,4 +79,4 @@ const SpotifySearchBar = () => {
   );
 };
 
-export default SpotifySearchBar;
+export default SearchBar;
